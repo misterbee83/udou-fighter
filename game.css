@@ -1,0 +1,15 @@
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; color: #ffd21a; }
+body { display: flex; align-items: center; justify-content: center; font-family: "Press Start 2P", "Courier New", monospace; }
+canvas#screen { image-rendering: pixelated; image-rendering: crisp-edges; display: block; }
+#boot { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; letter-spacing: 1px; }
+#gate {
+  position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+  background: rgba(3, 5, 18, 0.78); border: 0; cursor: pointer; font: inherit; color: #ffd21a; padding: 16px; text-align: center;
+}
+#gate[hidden] { display: none; }
+#gate:focus-visible { outline: 3px solid #7fd6ff; outline-offset: -8px; }
+.gate-title { font-size: clamp(18px, 5vw, 40px); color: #ffd21a; text-shadow: 3px 3px 0 #ff3b1f, 6px 6px 0 #000; }
+.gate-cta { font-size: clamp(12px, 2.4vw, 18px); color: #fff; animation: blink 1s steps(2, start) infinite; }
+.gate-note { font-size: clamp(11px, 2.1vw, 17px); color: #8fe0ff; line-height: 1.9; max-width: 40em; text-shadow: 2px 2px 0 #0a3a6a, 4px 4px 0 #000; letter-spacing: 1px; }
+@keyframes blink { to { visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) { .gate-cta { animation: none; } }

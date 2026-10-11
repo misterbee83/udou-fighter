@@ -1,0 +1,34 @@
+{
+ "seatL-calfucius": {
+  "x": 110,
+  "y": 20
+ },
+ "seatM-misterbee": {
+  "x": 172,
+  "y": 12
+ },
+ "seatR-teddy": {
+  "x": 238,
+  "y": 30
+ },
+ "pig": {
+  "x": 246,
+  "y": 110
+ },
+ "table-deadfish": {
+  "x": 214,
+  "y": 92
+ },
+ "seatL-chikn": {
+  "x": 145,
+  "y": 76
+ },
+ "seatM-chikn": {
+  "x": 190,
+  "y": 76
+ },
+ "seatR-chikn": {
+  "x": 245,
+  "y": 70
+ }
+}
