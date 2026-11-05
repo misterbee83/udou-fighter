@@ -23,6 +23,8 @@ canvas#screen { image-rendering: pixelated; image-rendering: crisp-edges; displa
 html.touch, html.touch body { position: fixed; inset: 0; overscroll-behavior: none; touch-action: none;
   -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
 html.touch canvas#screen { position: absolute; outline: none; }
+/* phones: blurred copy of the game behind everything, so the strips beside the picture aren't black */
+#ambient { position: fixed; inset: -40px; width: calc(100% + 80px); height: calc(100% + 80px); filter: blur(22px) brightness(0.45) saturate(1.2); pointer-events: none; }
 html.gated #touch { display: none; } /* TAP TO PLAY is its own screen: no buttons on top of it */
 html.touch #gate { z-index: 10; touch-action: manipulation; font-family: "Bangers", Impact, sans-serif; letter-spacing: 1px; }
 html.touch .gate-title { font-size: clamp(36px, 9vw, 72px); }
@@ -41,6 +43,11 @@ html.touch .gate-note { font-size: clamp(16px, 3.4vw, 22px); line-height: 1.4; }
 /* ---- stick (left thumb). EASY: the zone starts under the specials column */
 .tc-zone { position: absolute; left: 0; bottom: 0; top: calc(var(--st) + 112px); width: calc(var(--sl) + 230px); pointer-events: auto; touch-action: none; }
 #touch.easy .tc-zone { top: calc(var(--st) + 222px); } /* specials end at ~214px: the stick never reaches them */
+#touch { --ghost: 0.5; }
+.tc-base, .tc-btn, .tc-sp, .tc-lbl, .tc-easy, .tc-top { opacity: var(--ghost); transition: opacity 120ms; }
+.tc-base.on, .tc-btn.on, .tc-sp.on, .tc-easy.on, .tc-top.on { opacity: 1; }
+.tc-lbl { opacity: 0.75; }
+.tc-easy { opacity: 0.8; }
 .tc-base { box-sizing: border-box; position: absolute; left: calc(var(--sl) + 14px); bottom: calc(var(--sb) + 14px); width: 112px; height: 112px; border-radius: 50%;
   background: radial-gradient(circle, rgba(10,10,14,0.75) 0 54%, rgba(10,10,14,0.45) 56%); border: 3px solid rgba(224,173,42,0.75);
   box-shadow: 0 0 0 2px rgba(0,0,0,0.5), inset 0 0 18px rgba(0,0,0,0.6); }
@@ -51,8 +58,8 @@ html.touch .gate-note { font-size: clamp(16px, 3.4vw, 22px); line-height: 1.4; }
 /* ---- arcade panel (right thumb): JAB STRONG FIERCE / buttons / buttons / SHORT FORWARD ROUNDHOUSE */
 .tc-pad { position: absolute; right: calc(var(--sr) + 8px); bottom: calc(var(--sb) + 8px); pointer-events: none;
   display: grid; grid-template-columns: repeat(3, var(--b)); column-gap: var(--gap); row-gap: 10px; justify-items: center; align-items: center;
-  padding: 6px 8px 4px; border-radius: 20px; border: 2px solid rgba(255,255,255,0.12);
-  background-color: rgba(16,16,22,0.6); background-image: radial-gradient(rgba(255,255,255,0.09) 1px, transparent 1.5px); background-size: 7px 7px; }
+  padding: 6px 8px 4px; border-radius: 20px; border: 2px solid rgba(255,255,255,0.08);
+  background-color: rgba(16,16,22,0.18); background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1.5px); background-size: 7px 7px; }
 .tc-lbl { font-size: 12px; line-height: 1; color: #f6f1e2; text-shadow: 1px 1px 0 #000, 0 0 4px #000; white-space: nowrap; margin: -2px 0; }
 .tc-btn { pointer-events: auto; width: var(--b); height: var(--b); border-radius: 50%; border: 0; background: var(--cream);
   box-shadow: 0 0 0 4px var(--gold), 0 5px 0 4px var(--gold-dk), 0 9px 12px 3px rgba(0,0,0,0.55), inset 0 7px 10px rgba(0,0,0,0.16), inset 0 -3px 6px rgba(255,255,255,0.8);
@@ -126,9 +133,10 @@ html.touch .gate-note { font-size: clamp(16px, 3.4vw, 22px); line-height: 1.4; }
 .tc-fin { pointer-events: none; position: absolute; right: calc(var(--sr) + 8px); bottom: calc(var(--sb) + 8px); display: flex; flex-direction: column;
   align-items: stretch; gap: 5px; width: 184px; }
 .tc-fin-btn { pointer-events: auto; min-height: 34px; font-size: 16px; line-height: 1.1; padding: 3px 8px; border-radius: 10px; color: #fff;
-  border: 2px solid rgba(255,90,70,0.9); background: rgba(90,8,8,0.8); text-shadow: 1px 1px 0 #000; }
-.tc-fin-btn.tc-cameo { border-color: rgba(255,210,26,0.9); background: rgba(70,50,0,0.8); color: #ffe08a; }
-.tc-fin-btn:active { filter: brightness(1.6); }
+  border: 2px solid rgba(255,90,70,0.9); background: rgba(90,8,8,0.55); text-shadow: 1px 1px 0 #000; }
+.tc-fin-btn.tc-cameo { border-color: rgba(255,210,26,0.9); background: rgba(70,50,0,0.55); color: #ffe08a; }
+.tc-fin-btn { opacity: var(--ghost); transition: opacity 120ms; } /* ghosted like the other controls */
+.tc-fin-btn:active { filter: brightness(1.6); opacity: 1; }
 
 /* ---- portrait: ask for landscape */
 #rotate { display: none; }
